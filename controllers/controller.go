@@ -78,8 +78,9 @@ func Update(c *fiber.Ctx) error {
 		})
 	}
 
+	antrian.Id = "1"
 	antrian.Updated = time.Now()
-	antrian.Num++
+	antrian.Num = antrian.Num + 1
 
 	if models.DB.Where("id = ?", id).Updates(&antrian).RowsAffected == 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -102,6 +103,7 @@ func Reset(c *fiber.Ctx) error {
 		})
 	}
 
+	antrian.Id = "1"
 	antrian.Updated = time.Now()
 	antrian.Num = 0
 
@@ -112,7 +114,7 @@ func Reset(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(antrian)
-	
+
 }
 
 func Delete(c *fiber.Ctx) error {
