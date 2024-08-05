@@ -67,28 +67,24 @@ func Create(c *fiber.Ctx) error {
 }
 
 func Update(c *fiber.Ctx) error {
-
-	id := c.Params("id")
-
-	var antrian models.Antrian
-
-	if err := c.BodyParser(&antrian); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"message": err.Error(),
-		})
-	}
-
-	antrian.Id = "1"
-	antrian.Updated = time.Now()
-	antrian.Num = antrian.Num + 1
-
-	if models.DB.Where("id = ?", id).Updates(&antrian).RowsAffected == 0 {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"message": "Data Not Found",
-		})
-	}
-
-	return c.JSON(antrian)
+    id := c.Params("id")
+    var antrian models.Antrian
+    // Retrieve the current Antrian record from the database
+    if err := models.DB.First(&antrian, id).Error; err != nil {
+        return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+            "message": "Antrian not found",
+        })
+    }
+    // Increment the Num value
+    antrian.Num = antrian.Num + 1
+    antrian.Updated = time.Now() 
+    // Update the record in the database
+    if models.DB.Where("id = ?", id).Updates(&antrian).RowsAffected == 0 {
+        return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+            "message": "Failed to update Antrian",
+        })
+    }
+    return c.JSON(antrian)
 }
 
 func Reset(c *fiber.Ctx) error {
