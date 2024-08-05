@@ -9,8 +9,8 @@ import (
 	"gorm.io/gorm"
 )
 
-func Index(c *fiber.Ctx) error{
-	
+func Index(c *fiber.Ctx) error {
+
 	var antrian []models.Antrian
 
 	models.DB.Find(&antrian)
@@ -19,7 +19,7 @@ func Index(c *fiber.Ctx) error{
 
 }
 
-func Show(c *fiber.Ctx) error{
+func Show(c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
@@ -66,7 +66,7 @@ func Create(c *fiber.Ctx) error {
 	})
 }
 
-func Update(c *fiber.Ctx) error{
+func Update(c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
@@ -79,7 +79,7 @@ func Update(c *fiber.Ctx) error{
 	}
 
 	antrian.Updated = time.Now()
-	antrian.Num = antrian.Num + 1
+	antrian.Num++
 
 	if models.DB.Where("id = ?", id).Updates(&antrian).RowsAffected == 0 {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -87,12 +87,10 @@ func Update(c *fiber.Ctx) error{
 		})
 	}
 
-	return c.JSON(fiber.Map{
-		"message": "Data Updated",
-	})
+	return c.JSON(antrian)
 }
 
-func Reset(c *fiber.Ctx) error{
+func Reset(c *fiber.Ctx) error {
 
 	id := c.Params("id")
 
@@ -113,9 +111,8 @@ func Reset(c *fiber.Ctx) error{
 		})
 	}
 
-	return c.JSON(fiber.Map{
-		"message": "Data Updated",
-	})
+	return c.JSON(antrian)
+	
 }
 
 func Delete(c *fiber.Ctx) error {
