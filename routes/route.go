@@ -14,7 +14,7 @@ func Route(r *fiber.App) {
 	queue.Get("/", middlewares.AuthMiddleware, controllers.Index)
 	queue.Get("/:id", middlewares.AuthMiddleware, controllers.Show)
 	queue.Post("/", middlewares.AuthMiddleware, controllers.Create)
-	queue.Put("/update/:id", middlewares.AuthMiddleware, controllers.Update)
-	queue.Put("/reset/:id", middlewares.AuthMiddleware, controllers.Reset)
+	queue.Put("/up/:id", middlewares.AuthMiddleware, controllers.Update)
+	queue.Put("/re/:id", middlewares.AuthMiddleware, controllers.Reset)
 	queue.Delete("/:id", middlewares.AuthMiddleware, controllers.Delete)
 }
