@@ -88,8 +88,7 @@ func Update(c *fiber.Ctx) error {
 }
 
 func Reset(c *fiber.Ctx) error {
-
-	id := c.Params("id")
+    id := c.Params("id")
     var antrian models.Antrian
     // Retrieve the current Antrian record from the database
     if err := models.DB.First(&antrian, id).Error; err != nil {
@@ -97,9 +96,9 @@ func Reset(c *fiber.Ctx) error {
             "message": "Antrian not found",
         })
     }
-    // Increment the Num value
-    antrian.Num = 0
-    antrian.Updated = time.Now() 
+    // Set antrian.Num to 0 
+    antrian.Num = 0  
+    antrian.Updated = time.Now()
     // Update the record in the database
     if models.DB.Where("id = ?", id).Updates(&antrian).RowsAffected == 0 {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -107,7 +106,6 @@ func Reset(c *fiber.Ctx) error {
         })
     }
     return c.JSON(antrian)
-
 }
 
 func Delete(c *fiber.Ctx) error {
