@@ -25,7 +25,7 @@ func Show(c *fiber.Ctx) error{
 
 	var antrian models.Antrian
 
-	if err := models.DB.Find(&antrian).Where("id = ? ", id).First(&antrian).Error; err != nil {
+	if err := models.DB.Model(&antrian).Where("id = ? ", id).First(&antrian).Error; err != nil {
 
 		if err == gorm.ErrRecordNotFound {
 			return c.Status(http.StatusNotFound).JSON(fiber.Map{
@@ -125,7 +125,7 @@ func Delete(c *fiber.Ctx) error {
 	var antrian models.Antrian
 
 	if models.DB.Where("id = ?", id).Delete(&antrian).RowsAffected == 0 {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
 			"message": "Data Not Found",
 		})
 	}
