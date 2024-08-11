@@ -2,7 +2,7 @@ package models
 
 import "gorm.io/gorm"
 
-type Ant struct {
+type Antrian struct {
 	gorm.Model
 	Seq int `json:"ant"`
 }

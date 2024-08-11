@@ -44,7 +44,7 @@ func ConnectionDatabase() {
 	log.Println("Connected to database")
 	db.Logger = logger.Default.LogMode(logger.Info)
 
-	db.AutoMigrate(&Ant{})
+	db.AutoMigrate(&Antrian{})
 
 	DB = DataInstance{
 		Db: db,

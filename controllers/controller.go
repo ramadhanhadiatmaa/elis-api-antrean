@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+/*
 func Index(c *fiber.Ctx) error {
 
 	var ant []models.Ant
@@ -14,11 +15,11 @@ func Index(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(ant)
 
-}
+}*/
 
 func Create(c *fiber.Ctx) error {
 
-	antri := new(models.Ant)
+	antri := new(models.Antrian)
 
 	if err := c.BodyParser(antri); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -33,7 +34,7 @@ func Create(c *fiber.Ctx) error {
 
 func Show(c *fiber.Ctx) error {
 
-	ant := &models.Ant{}
+	ant := &models.Antrian{}
 	id := c.Params("id")
 
 	if err := models.DB.Db.First(ant, id).Error; err != nil {
@@ -47,7 +48,7 @@ func Show(c *fiber.Ctx) error {
 
 func Update(c *fiber.Ctx) error {
 
-	ant := &models.Ant{}
+	ant := &models.Antrian{}
 	id := c.Params("id")
 
 	if err := models.DB.Db.First(ant, id).Error; err != nil {
@@ -71,7 +72,7 @@ func Update(c *fiber.Ctx) error {
 
 func Reset(c *fiber.Ctx) error {
 
-	ant := &models.Ant{}
+	ant := &models.Antrian{}
 	id := c.Params("id")
 
 	if err := models.DB.Db.First(ant, id).Error; err != nil {
@@ -92,6 +93,7 @@ func Reset(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(ant)
 }
 
+/*
 func Delete(c *fiber.Ctx) error {
 
 	antri := &models.Ant{}
@@ -105,5 +107,5 @@ func Delete(c *fiber.Ctx) error {
 
 	models.DB.Db.Delete(antri, id)
 
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{"Message": "Delete Data"})
-}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"Message": "Delete D"})
+}*/
