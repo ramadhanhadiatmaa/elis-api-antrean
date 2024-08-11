@@ -1,12 +1,8 @@
 package models
 
-import (
-	"time"
-)
+import "gorm.io/gorm"
 
-type Antrian struct {
-	Id      string  `gorm:"type:varchar(300); primaryKey" json:"id"`
-	Num     int     `json:"num"`
-	Created time.Time `json:"created"`
-	Updated time.Time `json:"updated"`
+type Ant struct {
+	gorm.Model
+	Seq int `json:"ant"`
 }
