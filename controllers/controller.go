@@ -105,5 +105,5 @@ func Delete(c *fiber.Ctx) error {
 
 	models.DB.Db.Delete(antri, id)
 
-	return c.Status(fiber.StatusOK).JSON(fiber.Map{"Message": "Deleted"})
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"Message": "Delete Data"})
 }

@@ -45,5 +45,5 @@ jobs:
             sudo docker pull ${{ vars.IMAGE_NAME }}:v1.0
 
             sudo docker run --restart always -d -p 8112:8112 --name ${{ vars.CONTAINER_NAME }} \
-            -v /var/www/env/.env:/app/.env \
+            -v /var/www/ant/.env:/app/.env \
             ${{ vars.IMAGE_NAME }}:v1.0
