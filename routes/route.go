@@ -2,7 +2,6 @@ package routes
 
 import (
 	"antrian/controllers"
-	"antrian/middlewares"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -11,10 +10,10 @@ func Route(r *fiber.App) {
 
 	queue := r.Group("/api")
 
-	queue.Get("/", middlewares.AuthMiddleware, controllers.Index)
-	queue.Get("/:id", middlewares.AuthMiddleware, controllers.Show)
-	queue.Post("/", middlewares.AuthMiddleware, controllers.Create)
-	queue.Put("/:id", middlewares.AuthMiddleware, controllers.Update)
-	queue.Put("/:id", middlewares.AuthMiddleware, controllers.Reset)
-	queue.Delete("/:id", middlewares.AuthMiddleware, controllers.Delete)
+	//queue.Get("/", controllers.Index)
+	queue.Get("/:id", controllers.Show)
+	//queue.Post("/", controllers.Create)
+	queue.Put("/:id", controllers.Update)
+	queue.Put("/reset/:id", controllers.Reset)
+	//queue.Delete("/:id", controllers.Delete)
 }
