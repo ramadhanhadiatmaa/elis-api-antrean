@@ -15,7 +15,7 @@ func Index(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusOK).JSON(ant)
 
-}
+}*/
 
 func Create(c *fiber.Ctx) error {
 
@@ -30,7 +30,7 @@ func Create(c *fiber.Ctx) error {
 	models.DB.Db.Create(&antri)
 
 	return c.Status(fiber.StatusCreated).JSON(antri)
-}*/
+}
 
 func Show(c *fiber.Ctx) error {
 
